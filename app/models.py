@@ -13,7 +13,9 @@ class Medico(db.Model):
     tipo_identificacion = db.Column(db.String(4), nullable = True)
     numero_identificacion = db.Column(db.Integer)
     registro_medico = db.Column(db.Integer)
-    especialidad = db.Column(db.Integer)
+    especialidad = db.Column(db.String(50))
+    
+    citas = db.relationship('Cita', backref = 'medico')
 
 
 class Paciente(db.Model):
