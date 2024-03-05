@@ -16,7 +16,8 @@ class Medico(db.Model):
     especialidad = db.Column(db.String(50))
     
     citas = db.relationship('Cita', backref = 'medico')
-
+    citas = db.relationship('Cita', backref = 'paciente') 
+    citas = db.relationship('Cita', backref = 'consultorio')
 
 class Paciente(db.Model):
     
