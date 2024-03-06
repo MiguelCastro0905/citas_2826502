@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Medicos</title>
+  </head>
+  <body>
+	<h1> Lista de Medicos </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Tipo identificacion</th>
+                <th>Numero identificacion</th>
+                <th>Registro medicos</th>
+                <th>Especialidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for medico in medicos %}
+                <tr>
+                    <td>{{ medico.nombre }}</td>
+                    <td>{{  medico.apellidos}}</td>
+                    <td>{{ medico.tipo_identificacion}}</td>
+                    <td>{{medico.numero_identificacion}}</td>
+                    <td>{{medico.registro_medico}}</td>
+                    <td>{{medico.especialidad}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+  </body>
+</html>
+
