@@ -16,6 +16,7 @@
                 <th>Numero identificacion</th>
                 <th>Registro medicos</th>
                 <th>Especialidad</th>
+                <th>Ver detalles</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,11 @@
                     <td>{{medico.numero_identificacion}}</td>
                     <td>{{medico.registro_medico}}</td>
                     <td>{{medico.especialidad}}</td>
+                    <td>
+                        <a href="/medicos/{{ medico.id }}">
+                            Ver detalles 
+                        </a>
+                    </td>   
                 </tr>
             {% endfor %}
         </tbody>
