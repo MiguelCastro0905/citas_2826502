@@ -22,6 +22,20 @@ def get_all_consultorios():
     consultorios = Consultorio.query.all()
     return render_template("consultorios.html" , consultorios=consultorios)
 
+@app.route("/consultorios/create", methods = ['GET','POST'])
+def create_consultorio():
+    if(request.method == 'GET'):
+        nc = []
+        return render_template("consultorio_form.html",
+                               numero = nc)
+    
+    elif(request.method == 'POST'):
+        
+            new_consultorio = Consultorio(numero = request.form ["nc"])
+            db.session.add(new_consultorio)
+            db.session.commit()
+            return "consultorio registrado"
+
 
 #crear ruta para traer el medico por id()
 @app.route("/medicos/<int:id>")
@@ -41,11 +55,41 @@ def get_paciente_by_id(id):
     return render_template("paciente.html",
                             pac = paciente)
 
+@app.route("/pacientes/create", methods = ['GET' , 'POST'] )
+def create_paciente():
+ 
+    if(request.method == 'GET'):
+        tipo_sangre = [
+            "A-",
+            "B+",
+            "O+",
+            "AB-"
+        ]
+        return render_template("paciente_form.html",
+                                tipo_sangre = tipo_sangre)
+
+    elif(request.method == 'POST'):
+            #cuando se presiona 'guardar'
+            #crear un objeto de tipo medico
+            new_paciente = Paciente(nombre = request.form["nombre"],
+                                apellidos = request.form["apellidos"],
+                                tipo_identificacion = request.form["ti"],
+                                numero_identificacion = request.form["ni"],
+                                altura = request.form["al"],
+                                tipo_sangre = request.form["ts"]
+                                )
+            #añadirlo a la sesion sqlalchemy
+            db.session.add(new_paciente)
+            db.session.commit()
+            return "paciente registrado"
+
 
 #ruta de consultorio
-#@app.route("/consultorios/<int:id>")
-#def get_consultorio_by_id(id):
-    #Consultorio = 
+@app.route("/consultorios/<int:id>")
+def get_consultorio_by_id(id):
+    consultorio = Consultorio.query.get(id)
+    return render_template("consultorio.html",
+                            con = consultorio)
 
 
 #crear una ruta para crear nuevo medico
@@ -84,3 +128,7 @@ def create_medico():
         db.session.add(new_medico)
         db.session.commit()
         return "medico registrado"
+    
+
+
+     
